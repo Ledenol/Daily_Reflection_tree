@@ -1,0 +1,349 @@
+[
+{ "id": "START", "type": "start", "text": "Good evening. Let’s reflect on your day." },
+
+{
+"id": "A1_Q1",
+"parentId": "START",
+"type": "question",
+"text": "How would you describe your day?",
+"options": ["Productive", "Mixed", "Stressful", "Frustrating"]
+},
+
+{
+"id": "A1_D1",
+"parentId": "A1_Q1",
+"type": "decision",
+"rules": {
+"Productive": "A1_Q2_HIGH",
+"Mixed": "A1_Q2_HIGH",
+"Stressful": "A1_Q2_LOW",
+"Frustrating": "A1_Q2_LOW"
+}
+},
+
+{
+"id": "A1_Q2_HIGH",
+"type": "question",
+"text": "What contributed most to things going well?",
+"options": [
+"My preparation",
+"Team support",
+"I adapted quickly",
+"Things just worked out"
+],
+"signals": {
+"My preparation": "axis1:internal",
+"I adapted quickly": "axis1:internal",
+"Team support": "axis1:external",
+"Things just worked out": "axis1:external"
+}
+},
+
+{
+"id": "A1_Q2_LOW",
+"type": "question",
+"text": "When things went wrong, what was your first instinct?",
+"options": [
+"Figure out what I can control",
+"Wait for help",
+"Blame external factors",
+"Push through alone"
+],
+"signals": {
+"Figure out what I can control": "axis1:internal",
+"Push through alone": "axis1:internal",
+"Wait for help": "axis1:external",
+"Blame external factors": "axis1:external"
+}
+},
+
+{
+"id": "A1_Q3",
+"parentId": "A1_Q2_HIGH",
+"type": "question",
+"text": "Thinking back, where did you have the most control?",
+"options": [
+"My actions",
+"My mindset",
+"Very little control",
+"Others influenced everything"
+],
+"signals": {
+"My actions": "axis1:internal",
+"My mindset": "axis1:internal",
+"Very little control": "axis1:external",
+"Others influenced everything": "axis1:external"
+}
+},
+
+{
+"id": "A1_Q3_B",
+"parentId": "A1_Q2_LOW",
+"type": "question",
+"text": "Thinking back, where did you have the most control?",
+"options": [
+"My actions",
+"My mindset",
+"Very little control",
+"Others influenced everything"
+],
+"signals": {
+"My actions": "axis1:internal",
+"My mindset": "axis1:internal",
+"Very little control": "axis1:external",
+"Others influenced everything": "axis1:external"
+}
+},
+
+{
+"id": "A1_D2",
+"parentId": "A1_Q3",
+"type": "decision",
+"rules_signal": {
+"axis1": {
+"internal": "A1_REFLECT_INT",
+"external": "A1_REFLECT_EXT"
+}
+}
+},
+
+{
+"id": "A1_D2_B",
+"parentId": "A1_Q3_B",
+"type": "decision",
+"rules_signal": {
+"axis1": {
+"internal": "A1_REFLECT_INT",
+"external": "A1_REFLECT_EXT"
+}
+}
+},
+
+{
+"id": "A1_REFLECT_INT",
+"type": "reflection",
+"text": "You showed moments of agency today — recognizing where you influenced outcomes is key to growth."
+},
+
+{
+"id": "A1_REFLECT_EXT",
+"type": "reflection",
+"text": "Some things felt outside your control today. Still, even small choices can shift outcomes more than we notice."
+},
+
+{
+"id": "BRIDGE_1_2",
+"parentId": "A1_REFLECT_INT",
+"type": "bridge",
+"text": "Now let’s shift from control — to contribution.",
+"target": "A2_Q1"
+},
+
+{
+"id": "BRIDGE_1_2_B",
+"parentId": "A1_REFLECT_EXT",
+"type": "bridge",
+"text": "Now let’s shift from control — to contribution.",
+"target": "A2_Q1"
+},
+
+{
+"id": "A2_Q1",
+"type": "question",
+"text": "Which moment best reflects your role today?",
+"options": [
+"Helped someone without being asked",
+"Did my assigned work",
+"Expected recognition",
+"Felt others weren’t contributing"
+],
+"signals": {
+"Helped someone without being asked": "axis2:contribution",
+"Did my assigned work": "axis2:neutral",
+"Expected recognition": "axis2:entitlement",
+"Felt others weren’t contributing": "axis2:entitlement"
+}
+},
+
+{
+"id": "A2_Q2",
+"parentId": "A2_Q1",
+"type": "question",
+"text": "How did you approach your work today?",
+"options": [
+"Went beyond expectations",
+"Completed tasks as required",
+"Did minimum required",
+"Focused on what I should get"
+],
+"signals": {
+"Went beyond expectations": "axis2:contribution",
+"Completed tasks as required": "axis2:neutral",
+"Did minimum required": "axis2:entitlement",
+"Focused on what I should get": "axis2:entitlement"
+}
+},
+
+{
+"id": "A2_Q3",
+"parentId": "A2_Q2",
+"type": "question",
+"text": "What mattered more today?",
+"options": [
+"Helping the team succeed",
+"Finishing my own work",
+"Getting recognition",
+"Avoiding extra effort"
+],
+"signals": {
+"Helping the team succeed": "axis2:contribution",
+"Finishing my own work": "axis2:neutral",
+"Getting recognition": "axis2:entitlement",
+"Avoiding extra effort": "axis2:entitlement"
+}
+},
+
+{
+"id": "A2_D1",
+"parentId": "A2_Q3",
+"type": "decision",
+"rules_signal": {
+"axis2": {
+"contribution": "A2_REFLECT_CONTRIB",
+"entitlement": "A2_REFLECT_ENTITLE",
+"neutral": "A2_REFLECT_CONTRIB"
+}
+}
+},
+
+{
+"id": "A2_REFLECT_CONTRIB",
+"type": "reflection",
+"text": "You leaned toward contribution today — these actions often compound into long-term trust and impact."
+},
+
+{
+"id": "A2_REFLECT_ENTITLE",
+"type": "reflection",
+"text": "It’s natural to notice what we didn’t receive. But growth often comes from focusing on what we give."
+},
+
+{
+"id": "BRIDGE_2_3",
+"parentId": "A2_REFLECT_CONTRIB",
+"type": "bridge",
+"text": "Now let’s widen the lens — beyond just you.",
+"target": "A3_Q1"
+},
+
+{
+"id": "BRIDGE_2_3_B",
+"parentId": "A2_REFLECT_ENTITLE",
+"type": "bridge",
+"text": "Now let’s widen the lens — beyond just you.",
+"target": "A3_Q1"
+},
+
+{
+"id": "A3_Q1",
+"type": "question",
+"text": "Who were you most focused on today?",
+"options": [
+"Myself",
+"My tasks",
+"My team",
+"Customers or users"
+],
+"signals": {
+"Myself": "axis3:self",
+"My tasks": "axis3:self",
+"My team": "axis3:team",
+"Customers or users": "axis3:transcendent"
+}
+},
+
+{
+"id": "A3_Q2",
+"parentId": "A3_Q1",
+"type": "question",
+"text": "When facing challenges, what perspective did you take?",
+"options": [
+"How it affected me",
+"How it affected my work",
+"How it affected my team",
+"How it affected others"
+],
+"signals": {
+"How it affected me": "axis3:self",
+"How it affected my work": "axis3:self",
+"How it affected my team": "axis3:team",
+"How it affected others": "axis3:other"
+}
+},
+
+{
+"id": "A3_Q3",
+"parentId": "A3_Q2",
+"type": "question",
+"text": "What gave your day the most meaning?",
+"options": [
+"Personal success",
+"Completing tasks",
+"Helping someone",
+"Impact on others"
+],
+"signals": {
+"Personal success": "axis3:self",
+"Completing tasks": "axis3:self",
+"Helping someone": "axis3:other",
+"Impact on others": "axis3:transcendent"
+}
+},
+
+{
+"id": "A3_D1",
+"parentId": "A3_Q3",
+"type": "decision",
+"rules_signal": {
+"axis3": {
+"self": "A3_REFLECT_SELF",
+"team": "A3_REFLECT_OTHER",
+"other": "A3_REFLECT_OTHER",
+"transcendent": "A3_REFLECT_OTHER"
+}
+}
+},
+
+{
+"id": "A3_REFLECT_SELF",
+"type": "reflection",
+"text": "Focusing on yourself is natural — but meaning often grows when we extend our perspective outward."
+},
+
+{
+"id": "A3_REFLECT_OTHER",
+"type": "reflection",
+"text": "You showed awareness beyond yourself today — that’s where deeper meaning and impact emerge."
+},
+
+{
+"id": "SUMMARY",
+"parentId": "A3_REFLECT_SELF",
+"type": "summary",
+"text": "Today you explored your sense of control, your contribution, and your impact on others. Awareness is the first step toward change."
+},
+
+{
+"id": "SUMMARY_B",
+"parentId": "A3_REFLECT_OTHER",
+"type": "summary",
+"text": "Today you explored your sense of control, your contribution, and your impact on others. Awareness is the first step toward change."
+},
+
+{
+"id": "END",
+"parentId": "SUMMARY",
+"type": "end",
+"text": "See you tomorrow."
+}
+]
